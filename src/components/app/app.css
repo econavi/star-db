@@ -1,3 +1,17 @@
-.mainContainer {
+html, body {
+  height: 100%;
+  min-height: 100%;
   background: #000;
+}
+
+.stardb-app {
+  padding: 2% 5%;
+}
+
+.button-row {
+  margin: 1rem 0;
+}
+
+.button-row button {
+  margin-right: 1rem;
 }
