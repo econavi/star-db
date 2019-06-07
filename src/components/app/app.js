@@ -4,9 +4,10 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import PeoplePage from '../people-page';
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import ItemDetails from '../item-details';
+import Row from '../row'
 import ErrorIndicator from '../error-indicator';
-
+import ErrorBoundry from '../error-boundry'
 import ErrorButton from '../error-button';
 
 import './app.css';
@@ -48,7 +49,7 @@ export default class App extends Component {
       <RandomPlanet/> :
       null;
 
-    return (
+    /*return (
       <div className="stardb-app">
         <Header />
         { planet }
@@ -71,7 +72,7 @@ export default class App extends Component {
               renderItem={(item) => item.name} />
           </div>
           <div className="col-md-6">
-            <PersonDetails personId={this.state.selectedPerson} />
+            <ItemDetails itemId={this.state.selectedPerson} />
           </div>
         </div>
 
@@ -83,10 +84,40 @@ export default class App extends Component {
               renderItem={(item) => <span>{item.name} <button>!</button></span>} />
           </div>
           <div className="col-md-6">
-            <PersonDetails personId={this.state.selectedPerson} />
+            <ItemDetails itemId={this.state.selectedPerson} />
           </div>
         </div>
       </div>
+    );*/
+    
+    const { getPerson, getStarship,
+            getPersonImage, getStarshipImage } = this.swapiService;
+    
+    const personDetails = (
+      <ItemDetails
+        itemId={11}
+        getData={getPerson}
+        getImageUrl={getPersonImage} />
+    )
+    
+    const starshipDetails = (
+      <ItemDetails 
+        itemId={5}
+        getData={getStarship}
+        getImageUrl={getStarshipImage} />
+    )
+    
+    return (
+      <ErrorBoundry>
+        <div className="stardb-app">
+          <Header />
+          
+          <Row
+            left={personDetails}
+            right={starshipDetails} />
+        
+        </div>
+      </ErrorBoundry>
     );
   }
 }
