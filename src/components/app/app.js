@@ -4,11 +4,17 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorBoundry from '../error-boundry';
 
-import Row from "../row/row";
 import ItemDetails, { Record } from "../item-details/item-details";
 import SwapiService from "../../services/swapi-service";
 
-import ItemList from '../item-list';
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from '../sw-components';
 
 import './app.css';
 
@@ -34,12 +40,12 @@ export default class App extends Component {
       <RandomPlanet/> :
       null;
 
-      const { getPerson,
-              getStarship,
-              getPersonImage,
-              getStarshipImage,
-              getAllPeople,
-              getAllPlanets } = this.swapiService;
+    const { getPerson,
+            getStarship,
+            getPersonImage,
+            getStarshipImage,
+            getAllPeople,
+            getAllPlanets } = this.swapiService;
 
     const personDetails = (
       <ItemDetails
@@ -63,24 +69,26 @@ export default class App extends Component {
         <Record field="length" label="Length" />
         <Record field="costInCredits" label="Cost" />
       </ItemDetails>
-
     );
 
     return (
       <ErrorBoundry>
-        <ItemList
-          getData={getAllPeople}
-          onItemSelected={() => {}}>
+        <div className="stardb-app">
+          <Header />
 
-          { ({name}) => <span>{name}</span> }
-        </ItemList>
+          <PersonDetails itemId={11} />
 
-        <ItemList
-          getData={getAllPlanets}
-          onItemSelected={() => {}}>
+          <PlanetDetails itemId={5} />
 
-          { ({name}) => <span>{name}</span> }
-        </ItemList>
+          <StarshipDetails itemId={9} />
+
+          <PersonList />
+
+          <StarshipList />
+
+          <PlanetList />
+
+        </div>
       </ErrorBoundry>
     );
   }
