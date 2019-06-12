@@ -50,7 +50,6 @@ export default class App extends Component {
                   return <StarshipDetails itemId={id} />
                 }} 
               />
-              {/*<StarshipDetails itemId='15' />*/}
 
             </div>
           </Router>
